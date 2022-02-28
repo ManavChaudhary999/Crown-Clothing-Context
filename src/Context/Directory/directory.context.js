@@ -1,4 +1,6 @@
-const Initial_State = {
+import { createContext } from "react";
+
+const directoryState = {
     sections: [
         {
             id: 1,
@@ -36,11 +38,6 @@ const Initial_State = {
     ]
 };
 
-const directoryReducer = (state= Initial_State, action) => {
-    switch (action.type) {
-        default:
-            return state;
-    }
-};
+const DirectoryContext = createContext(directoryState);
 
-export default directoryReducer;
+export default DirectoryContext;
