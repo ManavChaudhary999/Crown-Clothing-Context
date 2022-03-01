@@ -2,11 +2,11 @@ import React, {useContext} from "react";
 import "./collection.styles.scss";
 
 import CollectionItem from "../../Components/collection-item/collection-item.component";
-import CollectionContext from "../../Context/Collections/collections.context";
+import ShopContext from "../../Context/Shop/shop.context";
 
 const CollectionPage = ({match}) => {
-    const collections = useContext(CollectionContext);
-    const collection = collections[match.params.collectionId];
+    const {collectionsData} = useContext(ShopContext);
+    const collection = collectionsData[match.params.collectionId];
 
     return (
         <div className="collection-page">

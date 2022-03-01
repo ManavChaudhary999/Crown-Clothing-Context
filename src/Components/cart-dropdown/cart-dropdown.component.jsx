@@ -1,15 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 import {withRouter} from "react-router-dom";
-import {connect} from "react-redux";
 import "./cart-dropdown.styles.scss";
 
 import CustomButton from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
 
-import {toggleCartHidden} from "../../redux/cart/cart.actions";
-import {selectCartItems} from "../../redux/cart/cart.selectors";
+import {CartContext} from "../../Context/Cart/cart.context";
 
-const CartDropdown = ({cartItems, history, dispatch}) => {
+const CartDropdown = ({ history, dispatch }) => {
+    const {cartItems, toggleCartHidden} = useContext(CartContext);
+
     return(
         <div className="cart-dropdown">
             <div className="cart-items">
@@ -23,21 +23,11 @@ const CartDropdown = ({cartItems, history, dispatch}) => {
             </div>
             <CustomButton onClick={()=> 
                 {history.push('/checkout');
-                 dispatch(toggleCartHidden());
+                 toggleCartHidden();
                 }
             }>CHECKOUT</CustomButton>
         </div>
     );
 };
 
-// oldWay without reselect
-// const mapStateToProps = (state) => ({
-//     cartItems: state.cart.cartItems
-// });
-
-// New Way with reselect
-const mapStateToProps = (state) => ({
-    cartItems: selectCartItems(state)
-});
-
-export default withRouter(connect(mapStateToProps)(CartDropdown));
+export default withRouter(CartDropdown);

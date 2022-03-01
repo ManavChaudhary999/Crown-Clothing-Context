@@ -15,7 +15,7 @@ export const AddItemToCart = (cartItems, cartItemToAdd) =>{
     return [...cartItems, {...cartItemToAdd, quantity: 1}] // else set quanitity 1 for first time
 };
 
-// Clear or remove Item From Cart
+// Clear or fully remove Item From Cart
 export const ClearItemFromCart = (cartItems, cartItemToRemove) => cartItems.filter(item => item.id !== cartItemToRemove.id);
 
 // Reduce Item quantity from cart and remove if its quantity become zero
@@ -34,3 +34,7 @@ export const RemoveItemFromCart = (cartItems, cartItemToRemove) => {
             item
     );
 }
+
+export const CartItemCount = (cartItems) => cartItems.reduce((accumulator, item) => accumulator + item.quantity, 0);
+
+export const CartTotalPrice = (cartItems) => cartItems.reduce((accumulator, item) => accumulator + item.quantity * item.price, 0);
